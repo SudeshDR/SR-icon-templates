@@ -1,6 +1,7 @@
 # My Project
 
 ## Animated Icons
+<script src="https://cdn.lordicon.com/lordicon.js"></script>
 
 <div class="container-rain">
     <lord-icon
