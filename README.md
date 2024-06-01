@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SR Icons</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="icon" type="image" href="https://bcassetcdn.com/public/blog/wp-content/uploads/2022/05/06231948/abstract-by-tornike-uchava-dribbble.png" />
+    <style>
+        body {
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto,
+                "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif,
+                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+                "Noto Color Emoji";
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #87ceeb;
+        }
+
+        /* Main container of the slider */
+        .slider-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 80%;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Previous and Next buttons */
+        .slider-button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease;
+            margin: 0 10px;
+        }
+
+        .slider-button:hover {
+            background-color: #555;
+        }
+
+        /* containers */
+        .container-sun,
+        .container-rain,
+        .container-cloud,
+        .container-storm,
+        .container-sun-and-cloud {
+            display: none;
+        }
+
+        .container-sun.active,
+        .container-rain.active,
+        .container-storm.active,
+        .container-cloud.active,
+        .container-sun-and-cloud.active {
+            display: block;
+        }
+
+        /* Text */
+        .city,
+        .day,
+        .grade {
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto,
+                "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif,
+                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+                "Noto Color Emoji";
+        }
+
+        .city {
+            color: whitesmoke;
+            font-size: 12px;
+            font-weight: 300;
+        }
+
+        .day {
+            color: whitesmoke;
+            font-size: 25px;
+            font-weight: 900;
+        }
+
+        .grade {
+            color: whitesmoke;
+            font-size: 45px;
+            font-weight: 400;
+        }
+
+        /* icon Github */
+        .github-container {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            margin: 20px;
+            z-index: 999;
+        }
+
+        .github-container p {
+            color: #757575;
+        }
+
+        .github-container i {
+            color: #757575;
+        }
+
+        .github-container i {
+            color: #757575;
+            transition: transform 0.3s;
+        }
+
+        .github-container i:hover {
+            transform: scale(1.5);
+        }
+
+        /* SUN */
+
+        .sun {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #ffcc00;
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+            animation: pulse 2s ease-in-out infinite, glow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+            }
+
+            50% {
+                box-shadow: 0 0 30px rgba(255, 204, 0, 0.9);
+            }
+
+            100% {
+                box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+            }
+        }
+
+        .container-sun {
+            position: relative;
+            width: 300px;
+            height: 200px;
+        }
+
+        .box-shadow-sun {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            width: 95%;
+            height: 85%;
+            background-color: #ffcc00;
+            border-radius: 20px;
+            opacity: 0.9;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            z-index: -1;
+        }
+
+        .content-sun {
+            position: relative;
+            z-index: 1;
+            background-color: #60a7c4;
+            border-radius: 20px;
+            width: 230px;
+            height: 130px;
+            padding: 20px 50px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-sun {
+            flex: 1;
+            height: auto;
+            width: 80%;
+        }
+
+        .text-sun {
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .text-sun p {
+            margin-top: 13px;
+            margin-left: 20px;
+            margin-bottom: -15px;
+        }
+
+        /* SUN & CLOUD */
+        .sun-inner,
+        .cloud-sun-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .sun-inner {
+            position: relative;
+            width: 80px;
+            top: 20px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #ffcc00;
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+            animation: pulse 2s ease-in-out infinite, glow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+            }
+
+            50% {
+                box-shadow: 0 0 30px rgba(255, 204, 0, 0.9);
+            }
+
+            100% {
+                box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+            }
+        }
+
+        .cloud-sun-inner {
+            position: relative;
+            width: 125px;
+            height: 65px;
+            border-radius: 90px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .cloud-sun-inner::before,
+        .cloud-sun-inner::after {
+            content: "";
+            position: absolute;
+            width: 72px;
+            height: 72px;
+            background-color: white;
+            border-radius: 36px;
+        }
+
+        .cloud-sun-inner::before {
+            top: -30px;
+            left: 30px;
+        }
+
+        .cloud-sun-inner::after {
+            top: -18px;
+            right: 30px;
+        }
+
+        @keyframes moveCloud {
+            from {
+                transform: translateX(-10px);
+            }
+
+            to {
+                transform: translateX(10px);
+            }
+        }
+
+        .cloud-sun-inner {
+            animation: moveCloud 4s linear infinite alternate;
+        }
+
+        .container-sun-and-cloud {
+            position: relative;
+            width: 300px;
+            height: 200px;
+        }
+
+        .box-shadow-sun-and-cloud {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            width: 95%;
+            height: 85%;
+            background-color: white;
+            border-radius: 20px;
+            opacity: 0.9;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            z-index: -1;
+        }
+
+        .content-sun-and-cloud {
+            position: relative;
+            z-index: 1;
+            background-color: #2b6f8ad3;
+            border-radius: 20px;
+            width: 230px;
+            height: 130px;
+            padding: 20px 50px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-sun-and-cloud {
+            flex: 1;
+            height: auto;
+            margin-bottom: 20px;
+            width: 80%;
+        }
+
+        .text-sun-and-cloud {
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .text-sun-and-cloud p {
+            margin-top: 13px;
+            margin-left: 20px;
+            margin-bottom: -15px;
+        }
+
+        /* RAIN */
+
+        .container-rain {
+            position: relative;
+            width: 300px;
+            height: 200px;
+        }
+
+        .box-shadow-rain {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            width: 95%;
+            height: 85%;
+            background-color: #015b7fe5;
+            border-radius: 20px;
+            opacity: 0.9;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            z-index: -1;
+        }
+
+        .content-rain {
+            position: relative;
+            z-index: 1;
+            background-color: #2b6f8a67;
+            border-radius: 20px;
+            width: 230px;
+            height: 130px;
+            padding: 20px 50px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-rain {
+            flex: 1;
+            height: auto;
+            margin-top: 20px;
+            width: 80%;
+        }
+
+        .text-rain {
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .text-rain p {
+            margin-top: 13px;
+            margin-left: 20px;
+            margin-bottom: -15px;
+        }
+
+        .raindrop {
+            position: absolute;
+            width: 8px;
+            height: 20px;
+            background-color: #015b7f;
+            opacity: 0.8;
+            left: calc(50% - 4px + (100px * var(--offset)));
+            top: calc(100% + 30px);
+        }
+
+        .raindrop:nth-child(1) {
+            --offset: 0;
+            animation: fallRain 1.5s linear infinite;
+        }
+
+        .raindrop:nth-child(2) {
+            --offset: 0.2;
+            animation: fallRain 1.8s linear infinite;
+        }
+
+        .raindrop:nth-child(3) {
+            --offset: 0.4;
+            animation: fallRain 1.7s linear infinite;
+        }
+
+        @keyframes fallRain {
+            0% {
+                transform: translateY(-10px);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(200px);
+                opacity: 0.4;
+            }
+        }
+
+        .rain-cloud {
+            position: relative;
+            width: 130px;
+            height: 70px;
+            border-radius: 90px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .rain-cloud::before,
+        .rain-cloud::after {
+            content: "";
+            position: absolute;
+            width: 72px;
+            height: 72px;
+            background-color: white;
+            border-radius: 36px;
+        }
+
+        .rain-cloud::before {
+            top: -30px;
+            left: 30px;
+        }
+
+        .rain-cloud::after {
+            top: -18px;
+            right: 30px;
+        }
+
+        @keyframes moveCloud {
+            from {
+                transform: translateX(-10px);
+            }
+
+            to {
+                transform: translateX(10px);
+            }
+        }
+
+        .rain-cloud {
+            animation: moveCloud 4s linear infinite alternate;
+        }
+
+        /* CLOUD */
+
+        .cloud {
+            position: relative;
+            width: 130px;
+            height: 70px;
+            border-radius: 90px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .cloud::before,
+        .cloud::after {
+            content: "";
+            position: absolute;
+            width: 72px;
+            height: 72px;
+            background-color: white;
+            border-radius: 36px;
+        }
+
+        .cloud::before {
+            top: -30px;
+            left: 30px;
+        }
+
+        .cloud::after {
+            top: -18px;
+            right: 30px;
+        }
+
+        @keyframes moveCloud {
+            from {
+                transform: translateX(-10px);
+            }
+
+            to {
+                transform: translateX(10px);
+            }
+        }
+
+        .cloud {
+            animation: moveCloud 4s linear infinite alternate;
+        }
+
+        .container-cloud {
+            position: relative;
+            width: 300px;
+            height: 200px;
+        }
+
+        .box-shadow-cloud {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            width: 95%;
+            height: 85%;
+            background-color: #012b3b;
+            border-radius: 20px;
+            opacity: 0.9;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            z-index: -1;
+        }
+
+        .content-cloud {
+            position: relative;
+            z-index: 1;
+            background-color: #041e29;
+            border-radius: 20px;
+            width: 230px;
+            height: 130px;
+            padding: 20px 50px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-cloud {
+            flex: 1;
+            height: auto;
+            margin-top: 20px;
+            width: 80%;
+        }
+
+        .text-cloud {
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .text-cloud p {
+            margin-top: 13px;
+            margin-left: 20px;
+            margin-bottom: -15px;
+        }
+
+        /* STORM */
+        .bolt {
+            margin: 2rem auto;
+            border-top: 75px solid yellow;
+            border-left: 5px solid transparent;
+            border-right: 10px solid transparent;
+            height: 0px;
+            width: 15px;
+            transform: skew(-25deg) scale(0.8);
+            opacity: 0.7;
+            animation: appearBolt 4s ease-in-out forwards infinite;
+        }
+
+        @keyframes appearBolt {
+
+            0%,
+            100% {
+                opacity: 0.7;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .bolt:after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            left: 15px;
+            top: -21px;
+            border-top: 75px solid yellow;
+            border-right: 26.25px solid transparent;
+        }
+
+        .raindrop-storm {
+            position: absolute;
+            width: 8px;
+            height: 20px;
+            background-color: #015b7f;
+            opacity: 0.8;
+            left: calc(50% - 4px + (100px * var(--offset)));
+            top: calc(100% + 30px);
+        }
+
+        .raindrop-storm:nth-child(1) {
+            --offset: 0;
+            animation: fallRain 1.5s linear infinite;
+        }
+
+        .raindrop-storm:nth-child(2) {
+            --offset: 0.2;
+            animation: fallRain 1.8s linear infinite;
+        }
+
+        .raindrop-storm:nth-child(3) {
+            --offset: 0.4;
+            animation: fallRain 1.7s linear infinite;
+        }
+
+        @keyframes fallRain {
+            0% {
+                transform: translateY(-10px);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(200px);
+                opacity: 0.4;
+            }
+        }
+
+        .cloud-storm {
+            position: relative;
+            width: 130px;
+            height: 70px;
+            border-radius: 90px;
+            background-color: grey;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .cloud-storm::before,
+        .cloud-storm::after {
+            content: "";
+            position: absolute;
+            width: 72px;
+            height: 72px;
+            background-color: grey;
+            border-radius: 36px;
+        }
+
+        .cloud-storm::before {
+            top: -30px;
+            left: 30px;
+        }
+
+        .cloud-storm::after {
+            top: -18px;
+            right: 30px;
+        }
+
+        @keyframes moveCloud {
+            from {
+                transform: translateX(-10px);
+            }
+
+            to {
+                transform: translateX(10px);
+            }
+        }
+
+        .cloud-storm {
+            animation: moveCloud 4s linear infinite alternate;
+        }
+
+        .container-storm {
+            position: relative;
+            width: 300px;
+            height: 200px;
+        }
+
+        .box-shadow-storm {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            width: 95%;
+            height: 85%;
+            background-color: grey;
+            border-radius: 20px;
+            opacity: 0.9;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            z-index: -1;
+        }
+
+        .content-storm {
+            position: relative;
+            z-index: 1;
+            background-color: #4ba2c5;
+            border-radius: 20px;
+            width: 230px;
+            height: 130px;
+            padding: 20px 50px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-storm {
+            flex: 1;
+            height: auto;
+            margin-bottom: 5px;
+            width: 80%;
+        }
+
+        .text-storm {
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .text-storm p {
+            margin-top: 13px;
+            margin-left: 20px;
+            margin-bottom: -15px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+
+            .slider-container {
+                flex-direction: column;
+            }
+
+            .slider-button {
+                margin: 60px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider-container">
+        <button id="prevButton" class="slider-button">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <div class="container-sun active">
+            <lord-icon src="https://cdn.lordicon.com/abwrkdvl.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <script src="https://cdn.lordicon.com/lordicon.js"></script>
+            <lord-icon src="https://cdn.lordicon.com/xzalkbkz.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+        <div class="container-rain">
+            <script src="https://cdn.lordicon.com/lordicon.js"></script>
+            <lord-icon src="https://cdn.lordicon.com/ppwsfvnn.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <script src="https://cdn.lordicon.com/lordicon.js"></script>
+            <lord-icon src="https://cdn.lordicon.com/qvyppzqz.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <script src="https://cdn.lordicon.com/lordicon.js"></script>
+            <lord-icon src="https://cdn.lordicon.com/wyqtxzeh.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <script src="https://cdn.lordicon.com/lordicon.js"></script>
+            <lord-icon src="https://cdn.lordicon.com/xirobkro.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/wzrwaorf.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/kndkiwmf.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/wzwygmng.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/wuvorxbv.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/vfczflna.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/ofwxettw.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/laqlvddb.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/surcxhka.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/jjoolpwc.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/unukghxb.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/rehjpyyh.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/vcuhguff.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/odavpkmb.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/olvznswf.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/aojaypmj.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/rqptwppx.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/zguybvqs.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/kxmvyael.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/bqkijzun.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/hpcxqbph.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/slaudcwh.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/vlycxjwx.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <div class="container-rain">
+            <lord-icon src="https://cdn.lordicon.com/avcjklpr.json" trigger="hover" style="width: 250px; height: 250px">
+            </lord-icon>
+        </div>
+
+        <button id="nextButton" class="slider-button">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <div class="github-container"></div>
+</body>
+<script>
+    const prevButton = document.getElementById("prevButton");
+    const nextButton = document.getElementById("nextButton");
+    const containers = document.querySelectorAll(".slider-container > div");
+    let currentIndex = 0;
+
+    function showContainer(index) {
+        containers.forEach((container, i) => {
+            if (i === index) {
+                container.classList.add("active");
+            } else {
+                container.classList.remove("active");
+            }
+        });
+    }
+
+    showContainer(currentIndex);
+
+    prevButton.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + containers.length) % containers.length;
+        showContainer(currentIndex);
+    });
+
+    nextButton.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % containers.length;
+        showContainer(currentIndex);
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") {
+            currentIndex =
+                (currentIndex - 1 + containers.length) % containers.length;
+            showContainer(currentIndex);
+        } else if (event.key === "ArrowRight") {
+            currentIndex = (currentIndex + 1) % containers.length;
+            showContainer(currentIndex);
+        }
+    });
+</script>
+
+</html>
